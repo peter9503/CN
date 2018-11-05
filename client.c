@@ -96,7 +96,7 @@ int parseArg(int *t,int *n,char addrList[][1024],int argc, char *argv[],int port
 
 int main(int argc, char **argv){
 	struct sockaddr_in dest[10];
-	int n,t = 10000,err,serverNum;
+	int n = 0,t = 1000,err,serverNum;
 	char addrList[10][1024];
 	clock_t start[10];
 	int portList[10];	
@@ -158,9 +158,11 @@ int main(int argc, char **argv){
 
 	//Here can be parallel
 	srand(time(NULL));
-
-	for(int packN = 0;packN < n;packN += 1){
-
+	
+	for(int packN = -10;packN < n-1;packN += 1){
+		if(n == 0){
+			packN = -100;
+		}
 		for(int i=0;i<serverNum;i++){
 
 			tv.tv_usec = (t%1000)*1000;
